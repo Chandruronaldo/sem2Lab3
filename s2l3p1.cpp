@@ -1,13 +1,14 @@
 #include <iostream>
 using namespace std;
-
+//Structure for node
 struct node
 {
 	int data;
 	node *next;
 	node *prev;
 };
-
+//class to do operations on the list
+//NOTE By mutual linakge between 1 and 2, i mean that 1's next node is 2 and 2's previous node is 1
 class list
 {
 	private:
@@ -16,18 +17,18 @@ class list
 	
 	public:
 	
-	list()
+	list()//default constructor
 	{
 		head=NULL;
 		tail=NULL;
 	}
 	
-	void insert(int val)
+	void insert(int val)//inserting node at the end of the list
 	{
 		node *temp=new node;
 		temp->data=val;
 			temp->next=NULL;
-			temp->prev=NULL;
+			temp->prev=NULL;//a new node with next and prev declared to be null
 		
 		if(head==NULL)
 		{
@@ -41,7 +42,7 @@ class list
 			tail->next=temp;
 			temp->prev=tail;
 			temp->next=NULL;
-			tail=temp;
+			tail=temp;//temp is made the next element of tail by mutual linkage and temp is made as tail
 			
 		}
 		
@@ -53,13 +54,13 @@ class list
 		node *alpha=new node;
 		bravo->data=val;
 		bravo->next=NULL;
-		bravo->prev=NULL;
+		bravo->prev=NULL;//a new node
 		if(pos==1)
 		{
 			head->prev=bravo;
 			bravo->prev=NULL;
 			bravo->next=head;
-			head=bravo;
+			head=bravo;//bravo is linked to head by mutual linkage and bravo is made as head
 		}
 		else
 		{
@@ -73,7 +74,9 @@ class list
 	           alpha->next=bravo;
 	           bravo->prev=alpha;
 	           bravo->next=charlie;
-	           charlie->prev=bravo;
+	           charlie->prev=bravo;//mutual linakge between alpha and charlie is removed
+			               //new link between alpha and bravo
+			               //new link between bravo and charlie
 		}
 	}
 	void deletee()
@@ -83,7 +86,7 @@ class list
 		tango->next=NULL;
 		tail=tango;
 		
-	}
+	}//tango is made as tails previous node and the tail element is removed . tango is made as the tail
 	
 	void deleteat(int pos)
 	{
@@ -94,12 +97,12 @@ class list
 		
 		if(pos==1)
 		{
-			delta=echo;
-			echo=echo->next;
+			delta=echo;//delta is made as head
+			echo=echo->next;//echo is delta's next
 			echo->prev=NULL;
 			delta->next==NULL;
 			head=echo;
-			delete delta;
+			delete delta;//mutual link is deleted between echo and delta and echo is made as head. delta is deletd
 		}
 		else
 		{
@@ -112,9 +115,10 @@ class list
 		foxtrot=echo->next;
 		delta->next=foxtrot;
 		foxtrot->prev=delta;
-		echo->next=NULL;
+		echo->next=NULL;//mutual link bwtween delta and echo && echo and foxtrot is removed
+			        //a new mutual link is created between delta and foxtrot
 		echo->prev=NULL;
-		delete echo;
+		delete echo;//echo is deleted
 		}
 		
 	}
@@ -130,7 +134,7 @@ class list
 			mike=mike->next;
 		}
 		
-		return i;
+		return i;//counting elements from head to tail and returning the value
 	}
 	
 	void display()
